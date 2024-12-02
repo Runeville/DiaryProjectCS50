@@ -10,6 +10,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 @app.route("/")
 def hello_world():
-    return "<h1>Hello World!</h1>"
+    return render_template("index.html")
