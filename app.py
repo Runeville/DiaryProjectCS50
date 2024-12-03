@@ -46,7 +46,27 @@ def index():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-    return render_template("login.html")
+    if request.method == 'GET':
+        return render_template("login.html")
+    
+    # If user tries to log in
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    if not (username and password):
+        flash("All fields must be filled")
+        return redirect(url_for("login"))
+    
+    #If user not found or password doesn't match
+    user = User.query.filter(User.username == username).first()
+    if user is None or not check_password_hash(user.password, password):
+        flash("Invalid username or password")
+        return redirect(url_for("login"))
+    
+    session.clear()
+    session["user_id"] = User.query.filter(User.username == username).first().id
+
+    return redirect(url_for("index"))
 
 
 @app.route("/register", methods = ["GET", "POST"])
@@ -60,7 +80,7 @@ def register():
     confirm_password = request.form.get("confirm_password")
 
     # If user didn't input everything
-    if not (username and password and password and confirm_password):
+    if not (username and password and confirm_password):
         flash("All fields must be filled")
         return redirect(url_for("register"))
     

@@ -8,6 +8,7 @@
     
     <div class="register-card bg-white p-4 rounded shadow">
         <h2 class="text-center mb-4">Register</h2>
+
         <div class="container mt-3">
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -23,18 +24,21 @@
         <form method="post" action="/register">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required autofocus>
+                <input type="text" class="form-control" id="username" name="username" required autofocus minlength="4">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" required minlength="8">
             </div>
             <div class="mb-3">
                 <label for="confirm_password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required minlength="8">
             </div>
             <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>
+        <div>
+            Already have an account? <a href="/login">Log in</a>
+        </div>
     </div>
 
 {% endblock %}
