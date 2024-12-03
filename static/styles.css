@@ -1,0 +1,7 @@
+/* Asked ChatGPT how to put a picture behind the contents */
+body {
+    background-image: url('../static/images/orange.jpg'); /* Путь к фоновому изображению */
+    background-size: cover; /* Изображение масштабируется по размеру экрана */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Запрещаем повторение изображения */
+}
