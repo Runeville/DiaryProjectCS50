@@ -50,8 +50,8 @@ def login():
         return render_template("login.html")
     
     # If user tries to log in
-    username = request.form.get("username")
-    password = request.form.get("password")
+    username = request.form.get("username").strip()
+    password = request.form.get("password").strip()
 
     if not (username and password):
         flash("All fields must be filled")
@@ -75,9 +75,9 @@ def register():
         return render_template("register.html")
     
     # If user tries to register
-    username = request.form.get("username")
-    password = request.form.get("password")
-    confirm_password = request.form.get("confirm_password")
+    username = request.form.get("username").strip()
+    password = request.form.get("password").strip()
+    confirm_password = request.form.get("confirm_password").strip()
 
     # If user didn't input everything
     if not (username and password and confirm_password):
