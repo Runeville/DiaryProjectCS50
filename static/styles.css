@@ -5,3 +5,10 @@ body {
     background-position: center; /* Центрируем изображение */
     background-repeat: no-repeat; /* Запрещаем повторение изображения */
 }
+
+.register-card {
+    max-width: 400px; /* Ограничиваем ширину карточки */
+    width: 100%; /* Заполняем пространство по ширине */
+    border-radius: 130px; /* Скругленные углы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+}

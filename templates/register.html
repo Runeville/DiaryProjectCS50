@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Login
+    Register
 {% endblock %}
 
 {% block main %}
     
     <div class="register-card bg-white p-4 rounded shadow">
-        <h2 class="text-center mb-4">Login</h2>
-        <form method="post" action="/login">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="post" action="/register">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -16,6 +16,10 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>
