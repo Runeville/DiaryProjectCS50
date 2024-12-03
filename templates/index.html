@@ -6,10 +6,22 @@
 
 {% block main %}
 
+<div class="overlay">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
 <div class="centered-container bg-white rounded shadow p-4">
     <h2 class="text-center mb-4">Take a Note</h2>
 
-    <form method="post" action="/note" class="h-100 d-flex flex-column">
+    <form method="post" action="/take-note" class="h-100 d-flex flex-column">
         <textarea id="note" name="note" rows="10" placeholder="You can write your thoughts here" required></textarea>
         <button type="submit" class="btn btn-primary mt-auto">Save</button>
     </form>

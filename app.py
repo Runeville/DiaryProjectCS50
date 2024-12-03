@@ -8,7 +8,7 @@ from helpers import login_required
 
 from sqlalchemy.exc import IntegrityError
 from database import init_db, db_session
-from models import User
+from models import User, Note
 
 
 app = Flask(__name__)
@@ -42,6 +42,25 @@ def shutdown_session(exception=None):
 @login_required
 def index():
     return render_template("index.html")
+
+
+@app.route("/take-note", methods=["POST"])
+def take_note():
+    text = request.form.get("note").strip()
+
+    if not text:
+        return redirect(url_for("index"))
+    
+    note = Note(text=text, user_id=session["user_id"])
+
+    try:
+        db_session.add(note)
+        db_session.commit()
+    except:
+        flash("Something went wrong")
+        return redirect(url_for("index"))
+
+    return redirect(url_for("index"))
 
 
 @app.route("/login", methods = ["GET", "POST"])
@@ -104,7 +123,6 @@ def register():
 
     return redirect(url_for("index"))
     
-
 
 @app.route("/logout")
 def logout():
