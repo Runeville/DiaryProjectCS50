@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, NotNullable
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, func
 from database import Base
 
 
@@ -22,6 +22,7 @@ class Note(Base):
 
     id = Column(Integer, primary_key=True)
     text = Column(Text, nullable=False)
+    time_created = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     user_id = Column(Integer, ForeignKey(User.id))
 
     def __init__(self, text=None, user_id=None):
@@ -29,7 +30,7 @@ class Note(Base):
         self.user_id = user_id
 
     def __repr__(self):
-        return f'<Note: "{self.text!r}">'
+        return f'<Note at {self.time_created!r}: "{self.text!r}">'
 
 
 class Emotion(Base):
