@@ -9,6 +9,38 @@ body {
 .register-card {
     max-width: 400px; /* Ограничиваем ширину карточки */
     width: 100%; /* Заполняем пространство по ширине */
-    border-radius: 130px; /* Скругленные углы */
+    border-radius: 10px; /* Скругленные углы */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+}
+
+.centered-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 75%; 
+}
+
+textarea {
+    width: 100%;
+    height: calc(100% - 50px);
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+}
+
+@media (min-width: 768px) {
+    .centered-container {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .centered-container {
+        width: 85%;
+    }
 }
