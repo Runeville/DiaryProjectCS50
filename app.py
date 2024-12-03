@@ -98,7 +98,8 @@ def register():
     except IntegrityError:
         flash("This username has already been taken")
         return redirect(url_for("register"))
-
+    
+    session.clear()
     session["user_id"] = User.query.filter(User.username == username).first().id
 
     return redirect(url_for("index"))
