@@ -8,10 +8,22 @@
     
     <div class="register-card bg-white p-4 rounded shadow">
         <h2 class="text-center mb-4">Register</h2>
+        <div class="container mt-3">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-warning" role="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
         <form method="post" action="/register">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" required autofocus>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
