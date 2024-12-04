@@ -19,7 +19,9 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 
-EMOTIONS = ["Anger", "Happiness"]
+EMOTIONS = [
+    ("Anger", "red"), ("Happiness", "green")
+    ]
 
 init_db()
 create_emotions(EMOTIONS, db_session)

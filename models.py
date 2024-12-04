@@ -38,9 +38,11 @@ class Emotion(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(15), unique=True, nullable=False)
+    color = Column(String(15), nullabe=False)
 
-    def __init__(self, name=None):
+    def __init__(self, name=None, color=None):
         self.name = name
+        self.color = color
 
     def __repr__(self):
         return f'<Emotion {self.name!r}>'
