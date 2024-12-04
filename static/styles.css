@@ -38,11 +38,16 @@ textarea {
     height: calc(100% - 150px);
     resize: none;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc8f;
     border-radius: 20px;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     font-size: 21px;
+    outline: none;
+}
+
+textarea:focus {
+    box-shadow: 0 0 2px lightgray;
 }
 
 .emotion-label {
