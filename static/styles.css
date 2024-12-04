@@ -35,7 +35,7 @@ body {
 
 textarea {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 150px);
     resize: none;
     padding: 10px;
     border: 1px solid #ccc;
@@ -43,6 +43,10 @@ textarea {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
     font-size: 21px;
+}
+
+.emotion-label {
+    font-weight: bold;
 }
 
 @media (min-width: 768px) {

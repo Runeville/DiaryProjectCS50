@@ -8,7 +8,7 @@ from helpers import login_required, create_emotions
 
 from sqlalchemy.exc import IntegrityError
 from database import init_db, db_session
-from models import User, Note
+from models import User, Note, Emotion
 
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 
 EMOTIONS = [
-    ("Anger", "red"), ("Happiness", "green")
+    ("Angry", "red"), ("Happy", "green")
     ]
 
 init_db()
@@ -46,7 +46,8 @@ def shutdown_session(exception=None):
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    emotions = Emotion.query.order_by(Emotion.name).all()
+    return render_template("index.html", emotions=emotions)
 
 
 @app.route("/take-note", methods=["POST"])

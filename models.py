@@ -38,7 +38,7 @@ class Emotion(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(15), unique=True, nullable=False)
-    color = Column(String(15), nullabe=False)
+    color = Column(String(15), nullable=False)
 
     def __init__(self, name=None, color=None):
         self.name = name
