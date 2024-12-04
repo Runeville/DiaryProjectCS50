@@ -4,7 +4,7 @@ from flask import Flask, redirect, render_template, request, session, flash, url
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required
+from helpers import login_required, create_emotions
 
 from sqlalchemy.exc import IntegrityError
 from database import init_db, db_session
@@ -19,7 +19,10 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 
+EMOTIONS = ["Anger", "Happiness"]
+
 init_db()
+create_emotions(EMOTIONS, db_session)
 
 @app.after_request
 def after_request(response):
