@@ -47,6 +47,16 @@ textarea {
 
 .emotion-label {
     font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.emotion-label:hover {
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
