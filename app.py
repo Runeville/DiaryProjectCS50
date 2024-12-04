@@ -1,18 +1,20 @@
-import os
-
 from flask import Flask, redirect, render_template, request, session, flash, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required, create_emotions
+from helpers import login_required, create_emotions, note_intro, fdatetime
 
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import desc
 from database import init_db, db_session
 from models import User, Note, Emotion, NoteEmotion
 
 
 app = Flask(__name__)
 app.secret_key = 'key'
+
+app.jinja_env.filters["note_intro"] = note_intro
+app.jinja_env.filters["datetime"] = fdatetime
 
 
 app.config["SESSION_PERMANENT"] = False
@@ -47,7 +49,8 @@ def shutdown_session(exception=None):
 @login_required
 def index():
     emotions = Emotion.query.order_by(Emotion.name).all()
-    return render_template("index.html", emotions=emotions)
+    notes = Note.query.filter(Note.user_id == session["user_id"]).order_by(desc(Note.time_created)).all()
+    return render_template("index.html", emotions=emotions, notes=notes)
 
 
 @app.route("/take-note", methods=["POST"])

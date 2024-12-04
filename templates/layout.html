@@ -46,13 +46,13 @@
         <div class="d-flex vh-100">
             <div class="sidebar bg-light border-end p-3 overflow-auto">
                 <h4 class="text-center">Your previous notes</h4>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="d-block py-2 px-3 text-decoration-none">Option 1</a> </li>
-                    <li><a href="#" class="d-block py-2 px-3 text-decoration-none">Option 2</a></li>
-                    <li><a href="#" class="d-block py-2 px-3 text-decoration-none">Option 3</a></li>
-                    <li><a href="#" class="d-block py-2 px-3 text-decoration-none">Option 4</a></li>
-                    <li><a href="#" class="d-block py-2 px-3 text-decoration-none">Option 5</a></li>
-                </ul>
+                {% if notes %}
+                    <ul class="list-unstyled">
+                        {% for note in notes %}
+                            <li><a href="/notes?id={{ note['id'] }}" class="d-block py-2 px-3 text-decoration-none">{{ note['text'] | note_intro }} | {{ note['time_created'] | datetime }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         {% endif %}
 
