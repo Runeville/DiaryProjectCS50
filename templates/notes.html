@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block main %}
+
+<div class="overlay">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+<div class="centered-container bg-white rounded shadow p-4">
+    <h2 class="text-center mb-4">{{ current_note["time_created"] | datetime }}</h2>
+
+    <div>
+        {% for para in current_note["text"].split("\r") %}
+            <p>{{ para | ftext }}</p>
+        {% endfor %}
+    </div>
+
+    {% if emotions %}
+    <div class="d-flex flex-column flex-wrap" style="height: 100px;">
+
+        {% for emotion in emotions %}
+            <div class="mb-2">
+                <input name="emotion" type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
+                <label class="emotion-label" for="{{ emotion['name'] }}">{{ emotion["name"] }}</label>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+</div>
+
+{% endblock %}

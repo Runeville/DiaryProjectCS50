@@ -30,7 +30,7 @@ class Note(Base):
         self.user_id = user_id
 
     def __repr__(self):
-        return f'<Note at {self.time_created!r}: "{self.text!r}">'
+        return f'<Note at {self.time_created!r}: {self.text!r}>'
 
 
 class Emotion(Base):

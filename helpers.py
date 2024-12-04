@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import render_template, redirect, session
-from datetime import datetime
+from markupsafe import Markup
 
 from models import Emotion
 
@@ -25,6 +25,9 @@ def create_emotions(emotions:list, db_session):
 
 def note_intro(text):
     return f"{text[:25]}..."
+
+def format_text(text: str):
+    return Markup.escape(text)
 
 def fdatetime(datetime):
     return datetime.strftime("%d.%m.%Y %H:%M")

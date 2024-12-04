@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request, session, flash, url
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required, create_emotions, note_intro, fdatetime
+from helpers import login_required, create_emotions, note_intro, fdatetime, format_text
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
@@ -15,6 +15,7 @@ app.secret_key = 'key'
 
 app.jinja_env.filters["note_intro"] = note_intro
 app.jinja_env.filters["datetime"] = fdatetime
+app.jinja_env.filters["ftext"] = format_text
 
 
 app.config["SESSION_PERMANENT"] = False
@@ -51,6 +52,30 @@ def index():
     emotions = Emotion.query.order_by(Emotion.name).all()
     notes = Note.query.filter(Note.user_id == session["user_id"]).order_by(desc(Note.time_created)).all()
     return render_template("index.html", emotions=emotions, notes=notes)
+
+@app.route("/notes")
+@login_required
+def notes():
+    note_id = request.args.get('id')
+
+    if note_id is not None: # If note is selected
+        note = Note.query.filter(Note.user_id == session['user_id']).filter(Note.id == note_id).first()
+    else: # Otherwise access last created note
+        note = Note.query.filter(Note.user_id == session['user_id']).order_by(desc(Note.time_created)).first()
+
+    # If note not found, flash an error
+    if note is None:
+        flash("Note not found or access denied")
+        return redirect(url_for("index"))
+    
+    # Find emotions connected to this note
+    note_emotions = NoteEmotion.query.filter(NoteEmotion.note_id == note.id).all()
+    emotion_ids = [i.id for i in note_emotions]
+    emotions = Emotion.query.filter(Emotion.id in emotion_ids).order_by(Emotion.name).all()
+    
+    notes = Note.query.filter(Note.user_id == session["user_id"]).order_by(desc(Note.time_created)).all()
+    
+    return render_template("notes.html", current_note=note, notes=notes)
 
 
 @app.route("/take-note", methods=["POST"])
