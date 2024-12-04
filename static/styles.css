@@ -59,9 +59,33 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.sidebar {
+    margin-top: 60px;
+    width: 200px;
+}
+
+.sidebar li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.sidebar a {
+    color: rgba(0, 0, 0, 0.5);
+    transition: 0.3s
+}
+
+.sidebar a:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
 @media (min-width: 768px) {
     .centered-container {
         width: 50%;
+    }
+}
+
+@media (max-width: 1150px) {
+    .sidebar {
+        display: none;
     }
 }
 
