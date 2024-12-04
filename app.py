@@ -8,7 +8,7 @@ from helpers import login_required, create_emotions
 
 from sqlalchemy.exc import IntegrityError
 from database import init_db, db_session
-from models import User, Note, Emotion
+from models import User, Note, Emotion, NoteEmotion
 
 
 app = Flask(__name__)
@@ -53,6 +53,7 @@ def index():
 @app.route("/take-note", methods=["POST"])
 def take_note():
     text = request.form.get("note").strip()
+    emotions = request.form.getlist("emotion")
 
     if not text:
         return redirect(url_for("index"))
@@ -65,6 +66,15 @@ def take_note():
     except:
         flash("Something went wrong")
         return redirect(url_for("index"))
+    
+    #If okay — add emotions to note
+    finally:
+        for emotion in emotions:
+            emotion = Emotion.query.filter(Emotion.name == emotion).first()
+            if emotion is not None:
+                db_session.add(NoteEmotion(note_id=note.id, emotion_id=emotion.id))
+            
+        db_session.commit()
 
     return redirect(url_for("index"))
 

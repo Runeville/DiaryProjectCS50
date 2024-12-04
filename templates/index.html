@@ -27,7 +27,7 @@
         <div class="d-flex flex-column flex-wrap" style="height: 100px;">
             {% for emotion in emotions %}
                 <div class="mb-2">
-                    <input type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
+                    <input name="emotion" type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
                     <label class="emotion-label" for="{{ emotion['name'] }}">{{ emotion["name"] }}</label>
                 </div>
             {% endfor %}
