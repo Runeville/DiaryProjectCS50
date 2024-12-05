@@ -21,9 +21,16 @@
         <nav class="bg-light border navbar navbar-expand-md navbar-light fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><span>Diary</span></a>
-                {% if session["user_id"] %}
-                    <a style="border-left: 2px solid rgba(0, 0, 0, 0.2); padding-left: 10px;" class="navbar-brand" href="/notes"><span>Notes</span></a>
-                {% endif %}
+                <ul class="navbar-nav me-auto mb-lg-0">
+
+                    <li>
+                        {% if session["user_id"] %}
+                            <button class="nav-link" style="border-left: 2px solid rgba(0, 0, 0, 0.2); padding-left: 10px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+                                Show Notes
+                            </button>
+                        {% endif %}
+                    </li>
+                </ul>         
                 <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,15 +51,27 @@
 
         {% if session["user_id"] %}
         <div class="d-flex vh-100">
-            <div class="sidebar bg-light border-end p-3 overflow-auto">
-                <h4 class="text-center">Your previous notes</h4>
-                {% if notes %}
-                    <ul class="list-unstyled">
-                        {% for note in notes %}
-                            <li><a href="/notes?id={{ note['id'] }}" class="d-block py-2 px-3 text-decoration-none">{{ note['text'] | note_intro }} | {{ note['time_created'] | datetime }}</a></li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+            <!-- Sidebar -->
+            <div class="offcanvas offcanvas-start bg-light border-end p-3 overflow-auto sidebar" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="sidebarLabel">Your previous notes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {% if notes %}
+                        <ul class="list-unstyled">
+                            {% for note in notes %}
+                                <li>
+                                    <a href="/notes?id={{ note['id'] }}" class="d-block py-2 px-3 text-decoration-none">
+                                        {{ note['text'] | note_intro }} | {{ note['time_created'] | datetime }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No notes available.</p>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
 
