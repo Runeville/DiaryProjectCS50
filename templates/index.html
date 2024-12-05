@@ -28,7 +28,7 @@
             {% for emotion in emotions %}
                 <div class="mb-2">
                     <input name="emotion" type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
-                    <label class="emotion-label" for="{{ emotion['name'] }}">{{ emotion["name"] }}</label>
+                    <label class="emotion-label" for="{{ emotion['name'] }}" data-color="{{ emotion['color'] }}">{{ emotion["name"] }}</label>
                 </div>
             {% endfor %}
         </div>

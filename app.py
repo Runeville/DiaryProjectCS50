@@ -22,7 +22,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///diary.db"
 
 EMOTIONS = [
-    ("Angry", "red"), ("Happy", "green")
+    ("Angry", "red"), ("Happy", "green"), ("Sad", "blue"), ("desgusted", "purple"), ("Feared", "darkslategrey"), ("Annoyed", "coral"), ("Bored", "green")
     ]
 
 init_db()

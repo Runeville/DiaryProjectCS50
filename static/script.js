@@ -5,15 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
         label.addEventListener('click', () => {
             const checkboxId = label.getAttribute('for');
             const checkbox = document.getElementById(checkboxId);
+            const color = label.dataset.color;
 
             if (checkbox) {
                 if (!checkbox.checked) {
-                    const labelText = label.textContent.trim();
-                    if (labelText === 'Angry') {
-                        label.style.color = 'red';
-                    } else if (labelText === 'Happy') {
-                        label.style.color = 'green';
-                    }
+                    label.style.color = color;
                 } else {
                     label.style.color = 'rgba(0, 0, 0, 0.5)';
                 }
