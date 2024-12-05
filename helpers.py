@@ -24,10 +24,9 @@ def create_emotions(emotions:list, db_session):
 
 
 def note_intro(text):
-    return f"{text[:25]}..."
-
-def format_text(text: str):
-    return Markup.escape(text)
+    if len(text) > 25:
+        return f"{text[:25]}..."
+    return text
 
 def fdatetime(datetime):
     return datetime.strftime("%d.%m.%Y %H:%M")
