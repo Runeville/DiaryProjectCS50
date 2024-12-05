@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request, session, flash, url
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required, create_emotions, note_intro, fdatetime, format_text
+from helpers import login_required, create_emotions, note_intro, fdatetime
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
@@ -15,7 +15,6 @@ app.secret_key = 'key'
 
 app.jinja_env.filters["note_intro"] = note_intro
 app.jinja_env.filters["datetime"] = fdatetime
-app.jinja_env.filters["ftext"] = format_text
 
 
 app.config["SESSION_PERMANENT"] = False
@@ -70,12 +69,12 @@ def notes():
     
     # Find emotions connected to this note
     note_emotions = NoteEmotion.query.filter(NoteEmotion.note_id == note.id).all()
-    emotion_ids = [i.id for i in note_emotions]
-    emotions = Emotion.query.filter(Emotion.id in emotion_ids).order_by(Emotion.name).all()
+    emotion_ids = [i.emotion_id for i in note_emotions]
+    emotions = Emotion.query.filter(Emotion.id.in_(emotion_ids)).order_by(Emotion.name).all()
     
     notes = Note.query.filter(Note.user_id == session["user_id"]).order_by(desc(Note.time_created)).all()
     
-    return render_template("notes.html", current_note=note, notes=notes)
+    return render_template("notes.html", current_note=note, notes=notes, emotions=emotions)
 
 
 @app.route("/take-note", methods=["POST"])
