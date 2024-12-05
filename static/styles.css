@@ -1,16 +1,16 @@
 /* Asked ChatGPT how to put a picture behind the contents */
 body {
-    background-image: url('../static/images/orange.jpg'); /* Путь к фоновому изображению */
-    background-size: cover; /* Изображение масштабируется по размеру экрана */
-    background-position: center; /* Центрируем изображение */
-    background-repeat: no-repeat; /* Запрещаем повторение изображения */
+    background-image: url('../static/images/orange.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
 .register-card {
-    max-width: 400px; /* Ограничиваем ширину карточки */
-    width: 100%; /* Заполняем пространство по ширине */
-    border-radius: 10px; /* Скругленные углы */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+    max-width: 400px; 
+    width: 100%; 
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .overlay {
