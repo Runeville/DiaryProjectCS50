@@ -1,6 +1,5 @@
 from functools import wraps
-from flask import render_template, redirect, session
-from markupsafe import Markup
+from flask import redirect, session
 
 from models import Emotion
 
