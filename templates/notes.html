@@ -21,19 +21,15 @@
 <div class="centered-container bg-white rounded shadow p-4">
     <h2 class="text-center mb-4">{{ current_note["time_created"] | datetime }}</h2>
 
-    <div>
-        {% for para in current_note["text"].split("\r") %}
-            <p>{{ para | ftext }}</p>
-        {% endfor %}
-    </div>
+    <textarea readonly id="note" name="note" rows="10">
+        {{ current_note['text']}}
+    </textarea>
 
     {% if emotions %}
-    <div class="d-flex flex-column flex-wrap" style="height: 100px;">
-
+    <div class="d-flex" style="height: 100px;">
         {% for emotion in emotions %}
-            <div class="mb-2">
-                <input name="emotion" type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
-                <label class="emotion-label" for="{{ emotion['name'] }}">{{ emotion["name"] }}</label>
+            <div class="p-2">
+                <label class="emotion-label">{{ emotion["name"] }}</label>
             </div>
         {% endfor %}
     </div>
