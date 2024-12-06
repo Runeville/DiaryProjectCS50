@@ -24,7 +24,7 @@
     <form method="post" action="/take-note" class="h-100 d-flex flex-column">
         <textarea id="note" name="note" rows="10" placeholder="You can write your thoughts here" required></textarea>
         {% if emotions %}
-        <div class="d-flex flex-column flex-wrap" style="height: 100px;">
+        <div class="d-flex flex-column flex-wrap mt-auto" style="height: 100px;">
             {% for emotion in emotions %}
                 <div class="mb-2">
                     <input name="emotion" type="checkbox" value="{{ emotion['name'] }}" id="{{ emotion['name'] }}">
