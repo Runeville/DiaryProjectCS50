@@ -16,8 +16,11 @@ def login_required(f):
 def create_emotions(emotions:list, db_session):
     for emotion in emotions:
         #if emotion doesn't exist yet — add new emotion
-        if Emotion.query.filter(Emotion.name == emotion[0]).first() is None:
+        find_emotion = Emotion.query.filter(Emotion.name == emotion[0]).first()
+        if find_emotion is None:
             db_session.add(Emotion(name=emotion[0], color=emotion[1]))
+        elif find_emotion.color != emotion[1]:
+            find_emotion.color = emotion[1]
 
     db_session.commit()
 
