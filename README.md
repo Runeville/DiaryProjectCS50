@@ -1,11 +1,11 @@
 # Emotions Diary
-## Video Demo:  <URL HERE>
+## Video Demo:  https://www.youtube.com/watch?v=yGjiNsFg_2c
 ## Description
 
 
 ### Intro
 
-This project is a web-application of **emotions diary** made as a project for CS50 course. People use emotions diary to understand what they feel if they are in need of deeper understanding of their emotions. 
+This is a web-application of **emotions diary** made as a project for CS50 course. People use emotions diary to understand what they feel if they are in need of deeper understanding of their emotions. 
 
 There are several "techniques" of writing this type of diary but I've chosen a really simple one. All the user has to do is to write a **note** on how something went (maybe, they bought a car, or broke up with someone, or talked to a very annoying person), then choose **emotions** that they feel about it from a list and save the note. When time comes and they want to review the note they can find it in notes history.
 
@@ -14,7 +14,7 @@ There are several "techniques" of writing this type of diary but I've chosen a r
 
 - I used python and flask for server side. 
 - SQLAlchemy is used to handle database.
-- HTML, CSS and JS are only for styling.
+- HTML, CSS and JS for styling.
 
 
 ### Files
